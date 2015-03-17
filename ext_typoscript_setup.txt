@@ -1,0 +1,15 @@
+
+config.tx_extbase{
+    persistence{
+        classes{
+
+            OliverThiele\OtEvents\Domain\Model\EventLocation {
+                mapping {
+                    tableName = tt_address
+                    recordType = Tx_OtEvents_EventLocation
+                }
+            }
+            
+    	}
+    }
+}

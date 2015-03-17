@@ -1,0 +1,51 @@
+
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="content">
+<h1>Listing for Event</h1>
+
+<f:flashMessages />
+
+<table  class="tx_otevents" >
+	<tr>
+		<th><f:translate key="tx_otevents_domain_model_event.title" /></th>
+		<th><f:translate key="tx_otevents_domain_model_event.subtitle" /></th>
+		<th><f:translate key="tx_otevents_domain_model_event.event_date_time_start" /></th>
+		<th><f:translate key="tx_otevents_domain_model_event.event_date_time_stop" /></th>
+		<th><f:translate key="tx_otevents_domain_model_event.short_text" /></th>
+		<th><f:translate key="tx_otevents_domain_model_event.bodytext" /></th>
+		<th><f:translate key="tx_otevents_domain_model_event.images" /></th>
+		<th><f:translate key="tx_otevents_domain_model_event.documents" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{events}" as="event">
+		<tr>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.title}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.subtitle}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.eventDateTimeStart -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.eventDateTimeStop -> f:format.date()}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.shortText}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.bodytext}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.images}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{event : event}"> {event.documents}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{event : event}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{event : event}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New Event</f:link.action>
+</f:section>

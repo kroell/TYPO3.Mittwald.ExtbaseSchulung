@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-03-17T17:19:48Z" product-name="ot_events">
+		<header/>
+		<body>
+			<trans-unit id="title.description">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="subtitle.description">
+				<source>Subtitle</source>
+			</trans-unit>
+			<trans-unit id="event_date_time_start.description">
+				<source>Start</source>
+			</trans-unit>
+			<trans-unit id="event_date_time_stop.description">
+				<source>Stop</source>
+			</trans-unit>
+			<trans-unit id="short_text.description">
+				<source>Teaser</source>
+			</trans-unit>
+			<trans-unit id="bodytext.description">
+				<source>RTE-Text</source>
+			</trans-unit>
+			<trans-unit id="images.description">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="documents.description">
+				<source>Documents</source>
+			</trans-unit>
+			<trans-unit id="event_location.description">
+				<source>eventLocation</source>
+			</trans-unit>
+			<trans-unit id="event_categories.description">
+				<source>eventCategories</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

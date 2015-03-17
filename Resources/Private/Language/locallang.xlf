@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-03-17T17:19:48Z" product-name="ot_events">
+		<header/>
+		<body>
+			<trans-unit id="tx_otevents_domain_model_event">
+				<source>Event</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.subtitle">
+				<source>Subtitle</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.event_date_time_start">
+				<source>Event Date Time Start</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.event_date_time_stop">
+				<source>Event Date Time Stop</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.short_text">
+				<source>Short Text</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.bodytext">
+				<source>Bodytext</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.images">
+				<source>Images</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.documents">
+				<source>Documents</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.event_location">
+				<source>Event Location</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_event.event_categories">
+				<source>Event Categories</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventlocation">
+				<source>Event Location</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventlocation.name">
+				<source>Name</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventlocation.address">
+				<source>Address</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventlocation.zip">
+				<source>Zip</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventlocation.city">
+				<source>City</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventlocation.country">
+				<source>Country</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventlocation.latitude">
+				<source>Latitude</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventlocation.longitude">
+				<source>Longitude</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventcategory">
+				<source>Event Category</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventcategory.title">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="tx_otevents_domain_model_eventcategory.parent_event_category">
+				<source>Parent Event Category</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

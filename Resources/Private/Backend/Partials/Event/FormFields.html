@@ -1,0 +1,33 @@
+
+<label for="title">
+	<f:translate key="tx_otevents_domain_model_event.title" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="title" /><br />
+<label for="subtitle">
+	<f:translate key="tx_otevents_domain_model_event.subtitle" />
+</label><br />
+	<f:form.textarea property="subtitle" cols="40" rows="15" /><br />
+<label for="eventDateTimeStart">
+	<f:translate key="tx_otevents_domain_model_event.event_date_time_start" /> <span class="required">(required)</span>
+</label><br />
+	<f:form.textfield property="eventDateTimeStart"  value="{event.eventDateTimeStart->f:format.date()}" /><br />
+<label for="eventDateTimeStop">
+	<f:translate key="tx_otevents_domain_model_event.event_date_time_stop" />
+</label><br />
+	<f:form.textfield property="eventDateTimeStop"  value="{event.eventDateTimeStop->f:format.date()}" /><br />
+<label for="shortText">
+	<f:translate key="tx_otevents_domain_model_event.short_text" />
+</label><br />
+	<f:form.textarea property="shortText" cols="40" rows="15" /><br />
+<label for="bodytext">
+	<f:translate key="tx_otevents_domain_model_event.bodytext" />
+</label><br />
+	<f:form.textarea property="bodytext" cols="40" rows="15" /><br />
+<label for="images">
+	<f:translate key="tx_otevents_domain_model_event.images" />
+</label><br />
+	<span>File upload is not implemented!</span><br /><br />
+<label for="documents">
+	<f:translate key="tx_otevents_domain_model_event.documents" />
+</label><br />
+	<span>File upload is not implemented!</span><br /><br />
