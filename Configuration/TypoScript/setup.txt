@@ -1,9 +1,23 @@
 
 plugin.tx_otevents {
 	view {
-		templateRootPath = {$plugin.tx_otevents.view.templateRootPath}
-		partialRootPath = {$plugin.tx_otevents.view.partialRootPath}
-		layoutRootPath = {$plugin.tx_otevents.view.layoutRootPath}
+		templateRootPaths {
+			10 = {$plugin.tx_otevents.view.templateRootPath}
+		}
+		partialRootPaths {
+			10 = {$plugin.tx_otevents.view.partialRootPath}
+		}
+		layoutRootPaths {
+			10 = {$plugin.tx_otevents.view.layoutRootPath}
+		}
+		widget {
+			TYPO3\CMS\Fluid\ViewHelpers\Widget\PaginateViewHelper {
+#				templateRootPaths{
+#					20 = {$plugin.tx_otevents.view.templateRootPath}
+#				}
+				templateRootPath = {$plugin.tx_otevents.view.templateRootPath}
+			}
+		}
 	}
 	persistence {
 		storagePid = {$plugin.tx_otevents.persistence.storagePid}
@@ -45,6 +59,7 @@ plugin.tx_otevents._CSS_DEFAULT_STYLE (
 	.typo3-messages .message-ok {
 		color:green;
 	}
+
 
 )
 

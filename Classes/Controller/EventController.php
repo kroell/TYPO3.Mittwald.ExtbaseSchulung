@@ -53,7 +53,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * __construct
 	 */
 	public function initializeAction() {
-		DebuggerUtility::var_dump($this->request);
+//		DebuggerUtility::var_dump($this->request);
 	}
 
 	/**
