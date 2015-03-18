@@ -9,7 +9,7 @@
 
         <f:then>
 
-            <f:widget.paginate objects="{events}" as="pagedEvents" configuration="{itemsPerPage: 3, insertAbove: 1, insertBelow: 0}">
+            <f:widget.paginate objects="{events}" as="pagedEvents" configuration="{itemsPerPage: 2, insertAbove: 0, insertBelow: 1}">
 
             <f:for each="{pagedEvents}" as="event">
 
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-8">
                                 <f:if condition="{event.eventDateTimeStart}">
-                                    {event.eventDateTimeStart -> f:format.date(format:'d.m.Y')}:
+                                    {event.eventDateTimeStart -> f:format.date(format:'{f:translate(id:\'format_date\')}')}:
                                     {event.eventDateTimeStart -> f:format.date(format:'H:i')} Uhr
                                     <f:if condition="{event.eventDateTimeStop}">
                                         bis

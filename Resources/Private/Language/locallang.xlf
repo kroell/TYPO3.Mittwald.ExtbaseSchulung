@@ -72,6 +72,13 @@
 			<trans-unit id="no_events_found">
             	<source>No Events found</source>
             </trans-unit>
+            <trans-unit id="back_to_list">
+            	<source>Back to list</source>
+            </trans-unit>
+            <trans-unit id="format_date">
+            	<source>m-d-Y</source>
+            </trans-unit>
+
 		</body>
 	</file>
 </xliff>

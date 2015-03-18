@@ -1,22 +1,63 @@
 
 <f:layout name="Default" />
 
-This Template is responsible for displaying a single view for a domain object
-
-If you modify this template, do not forget to change the overwrite settings
-in /Configuration/ExtensionBuilder/settings.yaml:
-  Resources:
-    Private:
-      Templates:
-        Show.html: keep
-
-Otherwise your changes will be overwritten the next time you save the extension in the extension builder
-
 <f:section name="main">
-<h1>{event.title}</h1>
 
-<f:flashMessages renderMode="div" />
-<f:render partial="Event/Properties" arguments="{event:event}" />
-<f:link.action action="list" pageUid="3">Back to list</f:link.action><br />
-<f:link.action action="new">New Event</f:link.action>
+    <f:flashMessages renderMode="div" />
+    <br />
+    <f:link.action action="list" pageUid="3"><i class="glyphicon glyphicon-chevron-left"></i> <f:translate id="back_to_list" /></f:link.action>
+    <hr/>
+
+
+    <div class="row">
+        <div class="col-md-12">
+            <p>
+                <f:if condition="{event.eventDateTimeStart}">
+                    {event.eventDateTimeStart -> f:format.date(format:'{f:translate(id:\'format_date\')}')}:
+                    {event.eventDateTimeStart -> f:format.date(format:'H:i')} Uhr
+                    <f:if condition="{event.eventDateTimeStop}">
+                        bis
+                        {event.eventDateTimeStop -> f:format.date(format:'H:i')} Uhr
+                    </f:if>
+                </f:if>
+            </p>
+            <h1>{event.title}</h1>
+            <h3>{event.subTitle}</h3>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+            <f:image image="{event.images.0}" class="img-responsive"></f:image>
+        </div>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <div class="col-md-12">
+            <f:format.html>{event.bodytext}</f:format.html>
+        </div>
+    </div>
+
+    <div class="row">
+        <f:for each="{event.images}" as="image" iteration="itemIteration">
+            <f:if condition="{itemIteration.index} > 0">
+                <div class="col-xs-6 col-md-3">
+                    <span class="thumbnail">
+                        <f:image image="{image}" class="img-responsive"></f:image>
+                    </span>
+                </div>
+            </f:if>
+        </f:for>
+
+    </div>
+
+
+    <f:comment><f:render partial="Event/Properties" arguments="{event:event}" /></f:comment>
+
+
+
 </f:section>

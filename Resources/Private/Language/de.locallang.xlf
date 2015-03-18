@@ -73,6 +73,14 @@
             	<source>No Events found</source>
             	<target>Hier gibts nix zu sehen!</target>
             </trans-unit>
+            <trans-unit id="back_to_list">
+            	<source>Back to list</source>
+            	<target>Zurück zur Übersicht</target>
+            </trans-unit>
+            <trans-unit id="format_date">
+            	<source>m-d-Y</source>
+            	<target>d.m.Y</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>
