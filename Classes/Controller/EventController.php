@@ -25,6 +25,8 @@ namespace OliverThiele\OtEvents\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use \OliverThiele\OtEvents\Domain\Model\Event;
 
 /**
  * EventController
@@ -40,13 +42,38 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	protected $eventRepository = NULL;
 
 	/**
+	 * persistence manager
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\PersistenceManagerInterface
+	 * @inject
+	 */
+	protected $persistenceManager;
+
+	/**
+	 * __construct
+	 */
+	public function initializeAction() {
+		DebuggerUtility::var_dump($this->request);
+	}
+
+	/**
 	 * action list
 	 *
 	 * @return void
 	 */
 	public function listAction() {
-		$events = $this->eventRepository->findAll();
-		$this->view->assign('events', $events);
+		$events = $this->eventRepository->findAll()->getQuery()->setOrderings(array('eventDateTimeStart'=>\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING))->execute();
+
+//		$newEvent = new Event();
+//		$this->eventRepository->add($newEvent);
+//		$this->persistenceManager->persistAll();
+
+		$this->view->assignMultiple(
+			array(
+				'events' => $events,
+				'settings' => $this->settings['flexForm']
+			)
+		);
 	}
 
 	/**

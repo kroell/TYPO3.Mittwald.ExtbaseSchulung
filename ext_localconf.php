@@ -14,7 +14,7 @@ if (!defined('TYPO3_MODE')) {
 	),
 	// non-cacheable actions
 	array(
-		'Event' => 'create, update, delete',
+		'Event' => 'list, show, create, update, delete',
 		'EventLocation' => '',
 		'EventCategory' => '',
 		

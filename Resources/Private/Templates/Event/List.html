@@ -6,43 +6,57 @@
     <f:flashMessages renderMode="div" />
 
     <f:if condition="{events}">
+
         <f:then>
-            <table  class="tx_otevents" >
-                <tr>
-                    <th><f:translate key="tx_otevents_domain_model_event.title" /></th>
-                    <th><f:translate key="tx_otevents_domain_model_event.subtitle" /></th>
-                    <th><f:translate key="tx_otevents_domain_model_event.event_date_time_start" /></th>
-                    <th><f:translate key="tx_otevents_domain_model_event.event_date_time_stop" /></th>
-                    <th><f:translate key="tx_otevents_domain_model_event.short_text" /></th>
-                    <th><f:translate key="tx_otevents_domain_model_event.bodytext" /></th>
-                    <!--<th><f:translate key="tx_otevents_domain_model_event.images" /></th>-->
-                    <!--<th><f:translate key="tx_otevents_domain_model_event.documents" /></th>-->
-                    <th> </th>
-                    <th> </th>
-                </tr>
 
-                <f:for each="{events}" as="event">
-                    <tr>
-                        <td><f:link.action action="show" arguments="{event : event}"> {event.title}</f:link.action></td>
-                        <td><f:link.action action="show" arguments="{event : event}"> {event.subtitle}</f:link.action></td>
-                        <td><f:link.action action="show" arguments="{event : event}"> {event.eventDateTimeStart -> f:format.date()}</f:link.action></td>
-                        <td><f:link.action action="show" arguments="{event : event}"> {event.eventDateTimeStop -> f:format.date()}</f:link.action></td>
-                        <td><f:link.action action="show" arguments="{event : event}"> {event.shortText}</f:link.action></td>
-                        <td><f:link.action action="show" arguments="{event : event}"> {event.bodytext}</f:link.action></td>
+            <f:for each="{events}" as="event">
 
-                        <f:comment><td><f:link.action action="show" arguments="{event : event}"> {event.images}</f:link.action></td>
-                        <td><f:link.action action="show" arguments="{event : event}"> {event.documents}</f:link.action></td></f:comment>
+                <div class="single-event panel panel-default">
+                    <div class="panel-body">
 
-                        <td><f:link.action action="edit" arguments="{event : event}">Edit</f:link.action></td>
-                        <td><f:link.action action="delete" arguments="{event : event}">Delete</f:link.action></td>
-                    </tr>
-                </f:for>
-            </table>
+                        <div class="row">
+                            <div class="col-md-10">
+                                <f:if condition="{event.eventDateTimeStart}">
+                                    {event.eventDateTimeStart -> f:format.date(format:'d.m.Y')}:
+                                    {event.eventDateTimeStart -> f:format.date(format:'H:i')} Uhr
+                                    bis
+                                    {event.eventDateTimeStop -> f:format.date(format:'H:i')} Uhr
+                                </f:if>
+                            </div>
+                            <div class="col-md-2 pull-right">
+                                <f:for each="{event.eventCategories}" as="category">
+                                    <span class="label label-warning">{category.title}</span>
+                                </f:for>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <f:link.action action="show" arguments="{event : event}" pageUid="5"><h3 style="margin-top:0;">{event.title}<f:if condition="{event.topEvent}"> <i class="glyphicon glyphicon-star"></i></f:if></h3></f:link.action>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <f:if condition="{event.subtitle}"><h3 style="margin-top:0;"><small>{event.subtitle -> f:format.nl2br()}</small></h3></f:if>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <article>{event.shortText -> f:format.crop(maxCharacters:'200')} <f:link.action action="show" arguments="{event : event}" pageUid="{settings.showEventPid}">mehr lesen</f:link.action></article>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </f:for>
+
         </f:then>
+
         <f:else>
             <div class="alert alert-danger"><f:translate id="no_events_found" default="Keine Events vorhanden" /></div>
         </f:else>
+
     </f:if>
 
-<f:link.action action="new">New Event</f:link.action>
 </f:section>

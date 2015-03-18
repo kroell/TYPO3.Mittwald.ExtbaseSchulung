@@ -323,6 +323,7 @@ $GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['event_location'] =
 		'maxitems' => 1,
 	),
 );
+
 $GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['event_categories'] = array(
 	'exclude' => 1,
 	'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_event.event_categories',
@@ -365,5 +366,28 @@ $GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['event_categories']
 				'script' => 'wizard_add.php',
 			),
 		),
+	),
+);
+
+$GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['top_event'] = array(
+	'exclude' => 1,
+	'label' => 'Is top event?',
+	'config' => array(
+		'type' => 'check',
+	),
+);
+
+$GLOBALS['TCA']['tx_otevents_domain_model_event']['interface'] = array(
+	'showRecordFieldList' =>
+		'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, subtitle, event_date_time_start, event_date_time_stop, top_event, short_text, bodytext, event_location, event_categories,
+		--div--;Media, images, documents',
+);
+
+$GLOBALS['TCA']['tx_otevents_domain_model_event']['types'] = array(
+	'1' => array(
+		'showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, subtitle, event_date_time_start, event_date_time_stop, top_event, short_text, bodytext;;;richtext:rte_transform[mode=ts_links],
+		--div--;Media, images, documents,
+		--div--;Zusatzinformation, event_location, event_categories,
+		--div--;LLL:EXT:cms/locallang_ttc.xlf:tabs.access, starttime, endtime'
 	),
 );

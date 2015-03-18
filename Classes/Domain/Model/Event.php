@@ -47,6 +47,13 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	protected $subtitle = '';
 
 	/**
+	 * topEvent
+	 *
+	 * @var bool
+	 */
+	protected $topEvent = FALSE;
+
+	/**
 	 * Start
 	 *
 	 * @var \DateTime
@@ -187,6 +194,11 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	public function __construct() {
 		//Do not remove the next line: It would break the functionality
 		$this->initStorageObjects();
+
+		if(!$this->title){
+			$now = new \DateTime();
+			$this->title = $now->format('d.m.Y H:i:s');
+		}
 	}
 
 	/**
@@ -375,6 +387,29 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 	 */
 	public function setEventCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $eventCategories) {
 		$this->eventCategories = $eventCategories;
+	}
+
+	/**
+	 * @return boolean
+	 */
+	public function isTopEvent()
+	{
+		return $this->topEvent;
+	}
+	/**
+	 * @return boolean
+	 */
+	public function getTopEvent()
+	{
+		return $this->isTopEvent();
+	}
+
+	/**
+	 * @param boolean $topEvent
+	 */
+	public function setTopEvent($topEvent)
+	{
+		$this->topEvent = $topEvent;
 	}
 
 }

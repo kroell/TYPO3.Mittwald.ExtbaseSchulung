@@ -8,6 +8,7 @@ CREATE TABLE tx_otevents_domain_model_event (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	subtitle text NOT NULL,
+	top_event tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	event_date_time_start datetime DEFAULT '0000-00-00 00:00:00',
 	event_date_time_stop datetime DEFAULT '0000-00-00 00:00:00',
 	short_text text NOT NULL,
