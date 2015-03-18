@@ -241,3 +241,129 @@ $GLOBALS['TCA']['tx_otevents_domain_model_event'] = array(
 	),
 );
 ## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
+
+$GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['subtitle'] = array(
+	'exclude' => 1,
+	'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_event.subtitle',
+	'config' => array(
+		'type' => 'text',
+		'cols' => 40,
+		'rows' => 3,
+		'eval' => 'trim'
+	)
+);
+
+$GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['images'] = array(
+	'exclude' => 1,
+	'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_event.images',
+	'config' =>
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+			'images',
+			array('maxitems' => 3,
+				'appearance' => array(
+					'createNewRelationLinkTitle' => 'LLL:EXT:cms/locallang_ttc.xlf:images.addFileReference'
+				),
+				'foreign_types' => array(
+					'0' => array(
+						'showitem' => '
+							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+							--palette--;;filePalette'
+					),
+					\TYPO3\CMS\Core\Resource\File::FILETYPE_TEXT => array(
+						'showitem' => '
+							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+							--palette--;;filePalette'
+					),
+					\TYPO3\CMS\Core\Resource\File::FILETYPE_IMAGE => array(
+						'showitem' => '
+							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+							--palette--;;filePalette'
+					),
+					\TYPO3\CMS\Core\Resource\File::FILETYPE_AUDIO => array(
+						'showitem' => '
+							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+							--palette--;;filePalette'
+					),
+					\TYPO3\CMS\Core\Resource\File::FILETYPE_VIDEO => array(
+						'showitem' => '
+							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+							--palette--;;filePalette'
+					),
+					\TYPO3\CMS\Core\Resource\File::FILETYPE_APPLICATION => array(
+						'showitem' => '
+							--palette--;LLL:EXT:lang/locallang_tca.xlf:sys_file_reference.imageoverlayPalette;imageoverlayPalette,
+							--palette--;;filePalette'
+					)
+				)
+			),
+			$GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']
+		),
+);
+
+$GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['documents'] = array(
+	'exclude' => 1,
+	'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_event.documents',
+	'config' =>
+		\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig(
+			'documents',
+			array('maxitems' => 10)
+		),
+);
+
+$GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['event_location'] = array(
+	'exclude' => 1,
+	'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_event.event_location',
+	'config' => array(
+		'type' => 'select',
+		'items' => array(
+			array('-', 0) // Leereintrag
+		),
+		'foreign_table' => 'tt_address',
+		'minitems' => 0,
+		'maxitems' => 1,
+	),
+);
+$GLOBALS['TCA']['tx_otevents_domain_model_event']['columns']['event_categories'] = array(
+	'exclude' => 1,
+	'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_event.event_categories',
+	'config' => array(
+		'type' => 'select',
+		'foreign_table' => 'tx_otevents_domain_model_eventcategory',
+		'MM' => 'tx_otevents_event_eventcategory_mm',
+		'size' => 10,
+		'autoSizeMax' => 30,
+		'maxitems' => 9999,
+		'multiple' => 0,
+		'renderMode' => 'tree',
+		'treeConfig' => array(
+			'expandAll' => true,
+			'parentField' => 'parent_event_category',
+			'appearance' => array(
+				'showHeader' => TRUE,
+			)
+		),
+		'wizards' => array(
+			'_PADDING' => 1,
+			'_VERTICAL' => 1,
+			'edit' => array(
+				'type' => 'popup',
+				'title' => 'Edit',
+				'script' => 'wizard_edit.php',
+				'icon' => 'edit2.gif',
+				'popup_onlyOpenIfSelected' => 1,
+				'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+			),
+			'add' => Array(
+				'type' => 'script',
+				'title' => 'Create new',
+				'icon' => 'add.gif',
+				'params' => array(
+					'table' => 'tx_otevents_domain_model_eventcategory',
+					'pid' => '###CURRENT_PID###',
+					'setValue' => 'prepend'
+				),
+				'script' => 'wizard_add.php',
+			),
+		),
+	),
+);

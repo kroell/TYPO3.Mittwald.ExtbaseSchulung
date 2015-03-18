@@ -95,7 +95,7 @@ $GLOBALS['TCA']['tx_otevents_domain_model_eventcategory'] = array(
 	),
 );
 
-if (!isset($GLOBALS['TCA']['tt_address']['ctrl']['type'])) {
+/*if (!isset($GLOBALS['TCA']['tt_address']['ctrl']['type'])) {
 	if (file_exists($GLOBALS['TCA']['tt_address']['ctrl']['dynamicConfigFile'])) {
 		require_once($GLOBALS['TCA']['tt_address']['ctrl']['dynamicConfigFile']);
 	}
@@ -181,9 +181,9 @@ $tmp_ot_events_columns = array(
 			'eval' => 'trim'
 		),
 	),
-);
+);*/
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_address',$tmp_ot_events_columns);
+/*\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_address',$tmp_ot_events_columns);
 
 $GLOBALS['TCA']['tt_address']['types']['Tx_OtEvents_EventLocation']['showitem'] = $TCA['tt_address']['types']['1']['showitem'];
 $GLOBALS['TCA']['tt_address']['types']['Tx_OtEvents_EventLocation']['showitem'] .= ',--div--;LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_eventlocation,';
@@ -191,10 +191,50 @@ $GLOBALS['TCA']['tt_address']['types']['Tx_OtEvents_EventLocation']['showitem'] 
 
 $GLOBALS['TCA']['tt_address']['columns'][$TCA['tt_address']['ctrl']['type']]['config']['items'][] = array('LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tt_address.tx_extbase_type.Tx_OtEvents_EventLocation','Tx_OtEvents_EventLocation');
 
-\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_address', $GLOBALS['TCA']['tt_address']['ctrl']['type'],'','after:' . $TCA['tt_address']['ctrl']['label']);
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes('tt_address', $GLOBALS['TCA']['tt_address']['ctrl']['type'],'','after:' . $TCA['tt_address']['ctrl']['label']);*/
 
 \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
     $_EXTKEY,
     'tx_otevents_domain_model_event'
 );
 ## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
+
+// Add Lat and Lng to tt_address
+
+$tmp_ot_events_columns = array(
+	'latitude' => array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_eventlocation.latitude',
+		'config' => array(
+			'type' => 'input',
+			'size' => 12,
+			'max' => 12,
+			'eval' => 'trim'
+		),
+	),
+	'longitude' => array(
+		'exclude' => 1,
+		'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_eventlocation.longitude',
+		'config' => array(
+			'type' => 'input',
+			'size' => 12,
+			'max' => 12,
+			'eval' => 'trim'
+		),
+	),
+);
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTCAcolumns('tt_address',$tmp_ot_events_columns,TRUE);
+
+\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addToAllTCAtypes(
+	'tt_address',
+	'latitude, longitude',
+	'',
+	'after: city'
+);
+
+
+// Wizard um Plugin erweitern
+if (TYPO3_MODE == 'BE') {
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['tx_otevents_wizicon'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TSconfig/Page/class.tx_otevents_wizicon.php';
+}

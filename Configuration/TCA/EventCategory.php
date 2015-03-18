@@ -120,3 +120,17 @@ $GLOBALS['TCA']['tx_otevents_domain_model_eventcategory'] = array(
 	),
 );
 ## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
+
+$GLOBALS['TCA']['tx_otevents_domain_model_eventcategory']['columns']['parent_event_category'] = array(
+	'exclude' => 1,
+	'label' => 'LLL:EXT:ot_events/Resources/Private/Language/locallang_db.xlf:tx_otevents_domain_model_eventcategory.parent_event_category',
+	'config' => array(
+		'type' => 'select',
+		'items' => array(
+			array('-', 0) // Leereintrag
+		),
+		'foreign_table' => 'tx_otevents_domain_model_eventcategory',
+		'minitems' => 0,
+		'maxitems' => 1,
+	),
+);

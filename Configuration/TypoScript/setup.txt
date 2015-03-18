@@ -48,6 +48,14 @@ plugin.tx_otevents._CSS_DEFAULT_STYLE (
 
 )
 
+
+TCEFORM.tt_content.pi_flexform.tx_otevents.sDEF.event {
+	# Remove
+	disabled = 1
+}
+
+
+
  # Module configuration
 module.tx_otevents {
 	persistence {

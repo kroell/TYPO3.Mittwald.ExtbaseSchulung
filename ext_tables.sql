@@ -51,15 +51,15 @@ CREATE TABLE tx_otevents_domain_model_event (
 #
 CREATE TABLE tt_address (
 
-	name varchar(255) DEFAULT '' NOT NULL,
-	address text NOT NULL,
-	zip varchar(255) DEFAULT '' NOT NULL,
-	city varchar(255) DEFAULT '' NOT NULL,
-	country varchar(255) DEFAULT '' NOT NULL,
+--	name varchar(255) DEFAULT '' NOT NULL,
+--	address text NOT NULL,
+--	zip varchar(255) DEFAULT '' NOT NULL,
+--	city varchar(255) DEFAULT '' NOT NULL,
+--	country varchar(255) DEFAULT '' NOT NULL,
 	latitude varchar(255) DEFAULT '' NOT NULL,
 	longitude varchar(255) DEFAULT '' NOT NULL,
 
-	tx_extbase_type varchar(255) DEFAULT '' NOT NULL,
+--	tx_extbase_type varchar(255) DEFAULT '' NOT NULL,
 
 );
 
