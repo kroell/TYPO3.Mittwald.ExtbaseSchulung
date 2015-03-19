@@ -64,6 +64,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 */
 	public function initializeAction() {
 //		DebuggerUtility::var_dump($this->request);
+
+		if($this->request->hasArgument('event')) {
+
+			$this->arguments['event'] // arguments hat kein @api als annotation, daher mit vorsicht verwenden
+				->getPropertyMappingConfiguration()
+				->forProperty('eventTimeStart')
+				->setTypeConverterOption('\\TYPO3\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+		}
 	}
 
 	/**
