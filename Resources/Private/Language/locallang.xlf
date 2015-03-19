@@ -78,7 +78,9 @@
             <trans-unit id="format_date">
             	<source>m-d-Y</source>
             </trans-unit>
-
+			<trans-unit id="dropdown_category">
+            	<source>Filter a category</source>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

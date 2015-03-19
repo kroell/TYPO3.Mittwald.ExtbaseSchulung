@@ -25,8 +25,10 @@ namespace OliverThiele\OtEvents\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 use \TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use \OliverThiele\OtEvents\Domain\Model\Event;
+use \OliverThiele\OtEvents\Domain\Model\EventCategory;
 
 /**
  * EventController
@@ -40,6 +42,14 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @inject
 	 */
 	protected $eventRepository = NULL;
+
+	/**
+	 * EventCategoryRepository
+	 *
+	 * @var \OliverThiele\OtEvents\Domain\Repository\EventCategoryRepository
+	 * @inject
+	 */
+	protected $eventCategoryRepository = NULL;
 
 	/**
 	 * persistence manager
@@ -59,19 +69,31 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * action list
 	 *
+	 * @param \OliverThiele\OtEvents\Domain\Model\EventCategory $eventCategory
 	 * @return void
 	 */
-	public function listAction() {
+	public function listAction($eventCategory = NULL) {
 		$events = $this->eventRepository->findAll()->getQuery()->setOrderings(array('eventDateTimeStart'=>\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING))->execute();
 
-//		$newEvent = new Event();
-//		$this->eventRepository->add($newEvent);
-//		$this->persistenceManager->persistAll();
+//		DebuggerUtility::var_dump($this->request->getArguments());
+//		DebuggerUtility::var_dump($eventCategory);
+
+//		$args = $this->request->getArguments();
+//		$selectedEvent = $args['eventCategory'];
+
+		if(!is_null($eventCategory)){
+			$events = $this->eventRepository->findByEventCategory($eventCategory);
+
+//			$filteredEvent = $this->eventCategoryRepository->findByUid($selectedEvent);
+		}
+
 
 		$this->view->assignMultiple(
 			array(
 				'events' => $events,
-				'settings' => $this->settings['flexForm']
+				'settings' => $this->settings['flexForm'],
+				'allCategories' => $this->eventCategoryRepository->findAll(),
+				'selectedEventCategory' => $eventCategory
 			)
 		);
 	}

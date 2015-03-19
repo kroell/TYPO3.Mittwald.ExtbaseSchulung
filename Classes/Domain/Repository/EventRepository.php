@@ -25,11 +25,24 @@ namespace OliverThiele\OtEvents\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use OliverThiele\OtEvents\Domain\Model\EventCategory;
 
 /**
  * The repository for Events
  */
 class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 
+	/**
+	 * @param EventCategory $eventCategory
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+	public function findByEventCategory(EventCategory $eventCategory) {
+
+		$query = $this->createQuery();
+		return $query
+			->matching(
+				$query->contains('eventCategories', $eventCategory)
+			)->execute();
+	}
 	
 }

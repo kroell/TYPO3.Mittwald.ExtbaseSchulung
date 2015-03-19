@@ -1,9 +1,22 @@
+{namespace events=OliverThiele\OtEvents\ViewHelpers}
+
 
 <f:layout name="Default" />
 
 <f:section name="main">
 
     <f:flashMessages renderMode="div" />
+
+    <div class="row" style="margin-top:20px;">
+        <div class="col-md-9">
+            <h1 style="margin-top:0px;">Veranstaltungen</h1>
+        </div>
+        <div class="col-md-3">
+            <f:render partial="Event/CategoryDropdown" arguments="{allCategories:allCategories, selectedEventCategory:selectedEventCategory}"/>
+        </div>
+
+    </div>
+    <br/>
 
     <f:if condition="{events}">
 
@@ -18,21 +31,15 @@
 
                         <div class="row">
                             <div class="col-md-8">
-                                <f:if condition="{event.eventDateTimeStart}">
-                                    {event.eventDateTimeStart -> f:format.date(format:'{f:translate(id:\'format_date\')}')}:
-                                    {event.eventDateTimeStart -> f:format.date(format:'H:i')} Uhr
-                                    <f:if condition="{event.eventDateTimeStop}">
-                                        bis
-                                        {event.eventDateTimeStop -> f:format.date(format:'H:i')} Uhr
-                                    </f:if>
-                                </f:if>
+                                <events:dateTimeRange start="{event.eventDateTimeStart}" end="{event.eventDateTimeStop}"/><f:if condition="{event.eventLocation}">, <a href="https://www.google.de/maps/@{event.eventLocation.latitude},{event.eventLocation.longitude},13z" target="_blank">{event.eventLocation.city}</a></f:if>
                             </div>
                             <div class="col-md-4 ">
-                                <f:for each="{event.eventCategories}" as="category" iteration="itemIteration" reverse="1">
+                                <f:for each="{event.eventCategories}" as="category" reverse="1">
                                     <span class="pull-right label label-{f:if(condition:'{category.uid} == 1', then:'danger', else:'default')}" style="margin-left:5px;">{category.title}</span>
                                 </f:for>
                             </div>
                         </div>
+
 
                         <div class="row">
                             <div class="col-md-10">

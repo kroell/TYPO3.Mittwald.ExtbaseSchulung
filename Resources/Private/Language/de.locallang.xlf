@@ -81,6 +81,10 @@
             	<source>m-d-Y</source>
             	<target>d.m.Y</target>
             </trans-unit>
+            <trans-unit id="dropdown_category">
+            	<source>Filter a category</source>
+            	<target>Kategorie filtern</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>
