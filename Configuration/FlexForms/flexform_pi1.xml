@@ -48,6 +48,20 @@
                         </TCEforms>
                     </settings.flexForm.showEventPid>
 
+                    <settings.flexForm.category>
+                        <TCEforms>
+                            <label>Kategorie</label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tx_otevents_domain_model_eventcategory</allowed>
+                                <maxitems>9999</maxitems>
+                                <minitems>0</minitems>
+                                <show_thumbs>true</show_thumbs>
+                            </config>
+                        </TCEforms>
+                    </settings.flexForm.category>
+
 				</el>
 			</ROOT>
 		</sDEF>

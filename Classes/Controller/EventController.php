@@ -67,6 +67,16 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	}
 
 	/**
+	 * __construct
+	 */
+	public function initializeListAction() {
+
+		if(isset($this->settings['flexForm']['category']) && $this->settings['flexForm']['category'] > 0){
+			$this->request->setArgument('eventCategory', $this->settings['flexForm']['category']);
+		}
+	}
+
+	/**
 	 * action list
 	 *
 	 * @param \OliverThiele\OtEvents\Domain\Model\EventCategory $eventCategory
