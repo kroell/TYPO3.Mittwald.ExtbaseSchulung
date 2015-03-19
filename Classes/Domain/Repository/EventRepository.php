@@ -42,7 +42,9 @@ class EventRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 		return $query
 			->matching(
 				$query->contains('eventCategories', $eventCategory)
-			)->execute();
+			)
+			->setOrderings(array('eventDateTimeStart'=>\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING))
+			->execute();
 	}
 	
 }

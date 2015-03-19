@@ -22,7 +22,7 @@
 
         <f:then>
 
-            <f:widget.paginate objects="{events}" as="pagedEvents" configuration="{itemsPerPage: 2, insertAbove: 0, insertBelow: 1}">
+            <f:widget.paginate objects="{events}" as="pagedEvents" configuration="{itemsPerPage: 2, insertAbove: 0, insertBelow: 1, addQueryStringMethod: 'GET,POST'}">
 
             <f:for each="{pagedEvents}" as="event">
 
