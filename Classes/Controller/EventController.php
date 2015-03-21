@@ -71,7 +71,12 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				->getPropertyMappingConfiguration()
 				->forProperty('eventTimeStart')
 				->setTypeConverterOption('\\TYPO3\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
+
+
+			$this->arguments['event']->getPropertyMappingConfiguration()->skipProperties('eventTimeStop');
 		}
+
+
 	}
 
 	/**
