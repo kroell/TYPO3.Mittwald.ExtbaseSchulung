@@ -1,0 +1,167 @@
+
+/** --------------------------------------------------------
+    ot_events
+    -------------------------------------------------------- **/
+
+.tx-ot-events .row{
+	margin-right: -15px;
+	margin-left:-15px;
+}
+.tx-ot-events .col-md-10{
+	padding-left: 15px;
+	padding-right: 15px;
+}
+.tx-ot-events .glyphicon{
+	margin-right: 5px;
+}
+.tx-ot-events #eventCategoryForm .form-control{
+	border: 1px solid #ccc;
+	border-radius: 0;
+}
+.tx-ot-events .pagination>li>a,
+.tx-ot-events .pagination>li>span{
+	color: #D70003;
+}
+
+.tx-ot-events .pagination>.active>a,
+.tx-ot-events .pagination>.active>a:focus,
+.tx-ot-events .pagination>.active>a:hover,
+.tx-ot-events .pagination>.active>span,
+.tx-ot-events .pagination>.active>span:focus,
+.tx-ot-events .pagination>.active>span:hover {
+	background-color: #D70003;
+	border-color: #D70003;
+	color: #FFF;
+}
+.tx-ot-events h3{
+	margin-top: 20px;
+}
+.tx-ot-events h4{
+	font-size: 1.5rem;
+	margin-bottom: 20px;
+}
+.tx-ot-events .first-event-image{
+	padding-left: 0;
+}
+
+/** --------------------------------------------------------
+    ot_events Calendar Widget
+    -------------------------------------------------------- **/
+.tx-ot-events #calendar-widget .table-condensed,
+.tx-ot-events #calendar-widget .datepicker{
+	width: 100%;
+}
+
+.tx-ot-events #calendar-widget .datepicker thead{
+	background-color: #D70003;
+}
+.tx-ot-events #calendar-widget .datepicker .datepicker-switch{
+	font-family: open_sansbold, Arial, sans-serif;
+	font-weight: 300;
+}
+.tx-ot-events #calendar-widget .datepicker table tr th{
+	background-color: #f0f1f1;
+	color: #555;
+	font-family: open_sansbold, Arial, sans-serif;
+	font-weight: 300;
+	border-radius: 0;
+}
+.tx-ot-events #calendar-widget .datepicker table tr:first-child th{
+	border-radius: 0;
+	background-color: #D70003;
+	padding: 20px 0;
+	color: #fff;
+}
+.tx-ot-events #calendar-widget .datepicker table tr td{
+	background-color: #f0f1f1;
+	color: #555;
+	border-radius: 0;
+}
+.tx-ot-events #calendar-widget .datepicker table tr td:hover{
+	background-color: #bbb;
+}
+.tx-ot-events #calendar-widget .datepicker table tr td,
+.tx-ot-events #calendar-widget .datepicker table tr th{
+	width: 40px;
+	height: 40px;
+
+	transition: all 0.2s ease-in;
+	-moz-transition: all 0.2s ease-in;
+	-webkit-transition: all 0.2s ease-in;
+	-o-transition: all 0.2s ease-in;
+}
+.tx-ot-events #calendar-widget .datepicker table tr th.prev {
+	border-radius: 4px 0px 0 0;
+}
+.tx-ot-events #calendar-widget .datepicker table tr th.next {
+	border-radius: 0px 4px 0 0;
+}
+.tx-ot-events #calendar-widget .datepicker table tr th.next {
+	border-radius: 0px 4px 0 0;
+}
+.tx-ot-events #calendar-widget .datepicker table tr th.prev:hover,
+.tx-ot-events #calendar-widget .datepicker table tr th.next:hover{
+	background-color: #b20d0d;
+}
+
+
+
+.tx-ot-events #calendar-widget .active,
+.tx-ot-events #calendar-widget .event-start{
+	background-color: #D70003 !important;
+	color: #fff !important;
+	text-shadow: none;
+}
+.tx-ot-events #calendar-widget .active:hover,
+.tx-ot-events #calendar-widget .event-start:hover{
+	background-color: #b20d0d !important;
+}
+
+.tx-ot-events #calendar-widget .active.today{
+	background-color: #ccc !important;
+	color: #fff;
+	text-shadow: none;
+}
+
+
+
+/** --------------------------------------------------------
+    ot_events Spinner
+    -------------------------------------------------------- **/
+#events-spinner{
+	display: none;
+}
+.events-spinner {
+	width: 60px;
+	height: 60px;
+	/*margin: 100px auto;*/
+	background-color: #ccc;
+	border-radius: 100%;
+	-webkit-animation: scaleout 1.0s infinite ease-in-out;
+	animation: scaleout 1.0s infinite ease-in-out;
+	position: absolute;
+	margin-left: auto;
+	margin-right: auto;
+	left: 0;
+	right: 0;
+	top:5px;
+}
+
+@-webkit-keyframes scaleout {
+	0% { -webkit-transform: scale(0.0) }
+	100% {
+		-webkit-transform: scale(1.0);
+		opacity: 0;
+	}
+}
+
+@keyframes scaleout {
+	0% {
+		transform: scale(0.0);
+		-webkit-transform: scale(0.0);
+	} 100% {
+		  transform: scale(1.0);
+		  -webkit-transform: scale(1.0);
+		  opacity: 0;
+	  }
+}

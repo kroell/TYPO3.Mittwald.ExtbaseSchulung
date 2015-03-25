@@ -37,7 +37,7 @@ if (!defined('TYPO3_MODE')) {
 		'Event' => 'list, show, create, update, delete',
 		'EventLocation' => '',
 		'EventCategory' => '',
-		'Widget' => 'calendar'
+		'Widget' => 'calendar, ajax'
 
 	)
 );

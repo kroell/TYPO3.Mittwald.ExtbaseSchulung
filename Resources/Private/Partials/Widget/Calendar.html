@@ -1,12 +1,17 @@
 <div id="calendar-widget" data-date="{today -> f:format.date(format:'d.m.Y')}"></div>
+<div id="events-spinner" class="events-spinner"></div>
 
 <script>
     jQuery(document).ready(function(){
+
+        // Verwendeter DatePicker
+        // @url https://bootstrap-datepicker.readthedocs.org
 
         var events = jQuery.parseJSON('<f:format.htmlentitiesDecode>{events}</f:format.htmlentitiesDecode>');
         var uriToList = '<f:format.htmlentitiesDecode>{linkToList}</f:format.htmlentitiesDecode>';
 
         var calendarWidget = $('#calendar-widget');
+        var eventsSpinner = $('#events-spinner');
 
         calendarWidget.datepicker({
             format: 'dd.mm.yyyy',
@@ -23,23 +28,47 @@
                 return className;
             }
         }).on('changeMonth', function(e){
-
-
+            eventsSpinner.fadeIn();
+            // Events nachladen, wenn der Monat gewechselt wird.
             ajaxCall('getEvents', e.date, function(response) {
-                console.log(response.data);
+                console.log('changeMonth response',response.data);
                 if(response.data){
-                    calendarWidget.datepicker('setDates', response.data , 'event-start');
+                    calendarWidget.datepicker('setDates', response.data.reverse());
+                    linkToList();
                 }
+                eventsSpinner.fadeOut();
             });
         });
 
         calendarWidget.on('changeDate', function(event) {
-            var formattedDate = event.date.toLocaleDateString('pl',{day:'2-digit',year:'numeric',month:'2-digit'});
-//            console.log('formattedDate',formattedDate);
-//            console.log('show: ', calendarWidget.datepicker('getFormattedDate'));
-            document.location.href = uriToList + '&tx_otevents_pi1[selectedDate]=' + formattedDate;
+            linkToList();
+//            var formattedDate = event.date.toLocaleDateString('pl',{day:'2-digit',year:'numeric',month:'2-digit'});
+            // open list view
+//            document.location.href = uriToList + '&tx_otevents_pi1[selectedDate]=' + formattedDate;
         });
 
+        // Fuegt das Click Event an jeden Tag mit einer Veranstaltung, so dass ein Click darauf
+        // die ListView mit dem angeklicketen Datum anzeigt
+        function linkToList() {
+            $('#calendar-widget .active.day').each(function(e) {
+                $(this).click(function() {
+                    var selectedDate = calendarWidget.datepicker('getFormattedDate');
+                    var day = $(this).html();
+
+                    var splitted = selectedDate.split('.');
+                    var month = splitted[1];
+                    var year = splitted[2].split(',')[0];
+
+                    console.log('day',day);
+                    console.log('month',month);
+                    console.log('year',year);
+
+                    document.location.href = uriToList + '&tx_otevents_pi1[selectedDate]=' + day + '.' + month + '.' + year;
+
+                });
+            });
+        }
+        linkToList();
 
         function ajaxCall(type, data, callback) {
 
@@ -59,7 +88,7 @@
                 }
             });
             request.fail(function( jqXHR, textStatus ) {
-                console.log('error');
+                console.log('error', textStatus);
             });
         }
 

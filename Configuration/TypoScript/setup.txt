@@ -50,13 +50,14 @@ module.tx_otevents {
 
 page {
 	includeCSS {
+		mainOtEventsCss = EXT:ot_events/Resources/Public/Css/tx_otevents_main.css
 		bsDatepickerCss = EXT:ot_events/Resources/Public/Vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css
 		#bsDatepickerCss.excludeFromConcatenation = 1
 		#bsDatepickerCss.disableCompression = 1
 	}
 	includeJSFooter{
-		#bsDatepickerJS = EXT:ot_events/Resources/Public/Vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js
-		#bsDatepickerLocaleJs = EXT:ot_events/Resources/Public/Vendor/bootstrap-datepicker/locales/bootstrap-datepicker.de.min.js
+		bsDatepickerJS = EXT:ot_events/Resources/Public/Vendor/bootstrap-datepicker/js/bootstrap-datepicker-custom.js
+		bsDatepickerLocaleJs = EXT:ot_events/Resources/Public/Vendor/bootstrap-datepicker/locales/bootstrap-datepicker.de.min.js
 	}
 }
 

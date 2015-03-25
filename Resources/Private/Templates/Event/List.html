@@ -9,7 +9,7 @@
 
     <div class="row" style="margin-top:20px;">
         <div class="col-md-9">
-            <h1 style="margin-top:0px;">Veranstaltungen</h1>
+            <h1 style="margin-top:0px;">Veranstaltungen <f:if condition="{selectedDate}">am {selectedDate -> f:format.date(format:'d.m.Y')}</f:if> </h1>
         </div>
         <div class="col-md-3">
             <f:if condition="{allCategories}">

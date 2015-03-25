@@ -11,6 +11,7 @@ namespace OliverThiele\OtEvents\ViewHelpers;
  *                                                                        *
  * The TYPO3 project - inspiring people to share!                         *
  *                                                                        */
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 
 /**
  * Class DateTimeRangeViewHelper
@@ -27,7 +28,16 @@ class DateTimeRangeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
 	 */
 	public function render(\DateTime $start=NULL, \DateTime $end=NULL) {
 
+		// TODO: ist crap ich weiss, aber nicht jetzt und er nimmt einfach die Timezone nicht, auch wenn sie gesetzt wird
+		$inc = explode(':',$start->format('P'));
+		$inc = $inc[0];
+		$start->modify('-' . $inc . ' hours');
+
 		if(!is_null($end)){
+			$inc = explode(':',$start->format('P'));
+			$inc = $inc[0];
+			$end->modify('-' . $inc . ' hours');
+
 			$diff = $end->diff($start);
 			$return = $start->format('d.m.Y') . ', ' . $start->format('H:i') . ' bis ' . $end->format('H:i') . ' Uhr (Dauer: '. $diff->format('%h Std') . ')';
 		} else if(!is_null($start)){

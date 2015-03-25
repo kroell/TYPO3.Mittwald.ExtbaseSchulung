@@ -63,7 +63,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * __construct
 	 */
 	public function initializeAction() {
-//		DebuggerUtility::var_dump($this->request);
 
 		if($this->request->hasArgument('event')) {
 
@@ -72,15 +71,13 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 				->forProperty('eventTimeStart')
 				->setTypeConverterOption('\\TYPO3\CMS\\Extbase\\Property\\TypeConverter\\DateTimeConverter', \TYPO3\CMS\Extbase\Property\TypeConverter\DateTimeConverter::CONFIGURATION_DATE_FORMAT, 'd.m.Y');
 
-
 //			$this->arguments['event']->getPropertyMappingConfiguration()->skipProperties('eventTimeStop');
 		}
-
 
 	}
 
 	/**
-	 * __construct
+	 * __construct der List Action
 	 */
 	public function initializeListAction() {
 
@@ -90,7 +87,10 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	}
 
 	/**
-	 * action list
+	 * Zeigt eine Listendarstellung der Events dar.
+	 *
+	 * Je nachdem ob eine Kategorie oder ein Startdatum gefiltert wurde, werden nur passende Events
+	 * dazu angezeigt.
 	 *
 	 * @param \OliverThiele\OtEvents\Domain\Model\EventCategory $eventCategory
 	 * @return void
@@ -102,6 +102,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		if(isset($args['selectedDate'])){
 			$selectedDate = new \DateTime($args['selectedDate']);
 			$events = $this->eventRepository->findByStart($selectedDate);
+			$this->view->assign('selectedDate',$selectedDate);
 		} else {
 			// is an event selected?
 			if(!is_null($eventCategory)){
@@ -121,7 +122,6 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 			)
 		);
 
-
 //		DebuggerUtility::var_dump($this->request->getArguments());
 //		DebuggerUtility::var_dump($selectedDate);
 
@@ -137,7 +137,7 @@ class EventController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	}
 
 	/**
-	 * action show
+	 * Zeigt die Details eines Events an.
 	 *
 	 * @param \OliverThiele\OtEvents\Domain\Model\Event $event
 	 * @return void
