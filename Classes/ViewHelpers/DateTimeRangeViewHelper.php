@@ -28,7 +28,8 @@ class DateTimeRangeViewHelper extends \TYPO3\CMS\Fluid\Core\ViewHelper\AbstractV
 	public function render(\DateTime $start=NULL, \DateTime $end=NULL) {
 
 		if(!is_null($end)){
-			$return = $start->format('d.m.Y') . ', ' . $start->format('H:i') . ' bis ' . $end->format('H:i') . ' Uhr';
+			$diff = $end->diff($start);
+			$return = $start->format('d.m.Y') . ', ' . $start->format('H:i') . ' bis ' . $end->format('H:i') . ' Uhr (Dauer: '. $diff->format('%h Std') . ')';
 		} else if(!is_null($start)){
 			$return = $start->format('d.m.Y') . ', ' . $start->format('H:i') . ' Uhr';
 		} else{

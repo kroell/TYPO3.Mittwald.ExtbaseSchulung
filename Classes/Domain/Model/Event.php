@@ -412,4 +412,17 @@ class Event extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
 		$this->topEvent = $topEvent;
 	}
 
+	/**
+	 * To get access to protected variables and encode them to json
+	 */
+	public function getJsonData() {
+		$var = get_object_vars($this);
+		foreach ($var as &$value) {
+			if (is_object($value) && method_exists($value, 'getJsonData')) {
+				$value = $value->getJsonData();
+			}
+		}
+		return $var;
+	}
+
 }

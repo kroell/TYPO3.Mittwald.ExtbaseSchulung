@@ -1,63 +1,84 @@
+{namespace events=OliverThiele\OtEvents\ViewHelpers}
 
 <f:layout name="Default" />
 
 <f:section name="main">
 
     <f:flashMessages renderMode="div" />
-    <br />
-    <f:link.action action="list" pageUid="3"><i class="glyphicon glyphicon-chevron-left"></i> <f:translate id="back_to_list" /></f:link.action>
-    <hr/>
 
+    <div class="tx-ot-events-show">
+        <hr/>
 
-    <div class="row">
-        <div class="col-md-12">
-            <p>
-                <f:if condition="{event.eventDateTimeStart}">
-                    {event.eventDateTimeStart -> f:format.date(format:'{f:translate(id:\'format_date\')}')}:
-                    {event.eventDateTimeStart -> f:format.date(format:'H:i')} Uhr
-                    <f:if condition="{event.eventDateTimeStop}">
-                        bis
-                        {event.eventDateTimeStop -> f:format.date(format:'H:i')} Uhr
+        <f:if condition="{event.eventCategories}">
+            <f:for each="{event.eventCategories}" as="category" reverse="1">
+                <span class="pull-right label label-{f:if(condition:'{category.uid} == 1', then:'danger', else:'default')}" style="margin-left:5px;">{category.title}</span>
+            </f:for>
+        </f:if>
+
+        <div class="row">
+            <div class="col-md-12">
+                <p>
+                    <events:dateTimeRange start="{event.eventDateTimeStart}" end="{event.eventDateTimeStop}"/>
+                    <f:if condition="{event.eventLocation}"> in
+                        <f:if condition="{event.eventLocation.latitude}">
+                            <f:then>
+                                <a href="https://www.google.de/maps/@{event.eventLocation.latitude},{event.eventLocation.longitude},13z" target="_blank">{event.eventLocation.city}</a>
+                            </f:then>
+                            <f:else>
+                                {event.eventLocation.city}
+                            </f:else>
+                        </f:if>
                     </f:if>
-                </f:if>
-            </p>
-            <h1>{event.title}</h1>
-            <h3>{event.subTitle}</h3>
+                </p>
+                <h1><f:if condition="{event.topEvent}"> <i class="glyphicon glyphicon-star"></i></f:if> {event.title}</h1>
+                <h3>{event.subTitle}</h3>
+            </div>
         </div>
-    </div>
 
-    <br/>
+        <br/>
 
-    <div class="row">
-        <div class="col-md-12">
-            <f:image image="{event.images.0}" class="img-responsive"></f:image>
-        </div>
-    </div>
+        <f:if condition="{event.images}">
+            <f:then>
+                <div class="row">
 
-    <br/>
-
-    <div class="row">
-        <div class="col-md-12">
-            <f:format.html>{event.bodytext}</f:format.html>
-        </div>
-    </div>
-
-    <div class="row">
-        <f:for each="{event.images}" as="image" iteration="itemIteration">
-            <f:if condition="{itemIteration.index} > 0">
-                <div class="col-xs-6 col-md-3">
-                    <span class="thumbnail">
-                        <f:image image="{image}" class="img-responsive"></f:image>
-                    </span>
+                    <div class="col-md-12">
+                        <div class="col-md-4 first-event-image">
+                            <f:image image="{event.images.0}" class="img-responsive" maxWidth="800"></f:image>
+                        </div>
+                        <f:format.html>{event.bodytext}</f:format.html>
+                    </div>
                 </div>
-            </f:if>
-        </f:for>
+                <br/>
+            </f:then>
+            <f:else>
+                <div class="row">
+                    <div class="col-md-12">
+                        <f:format.html>{event.bodytext}</f:format.html>
+                    </div>
+                </div>
+            </f:else>
+        </f:if>
+
+
+
+        <f:if condition="{event.images}">
+            <div class="row">
+                <f:for each="{event.images}" as="image" iteration="itemIteration">
+                    <f:if condition="{itemIteration.index} > 0">
+                        <div class="col-xs-6 col-md-3">
+                            <span class="thumbnail">
+                                <f:image image="{image}" class="img-responsive"></f:image>
+                            </span>
+                        </div>
+                    </f:if>
+                </f:for>
+            </div>
+        </f:if>
+
+        <br />
+        <hr/>
+        <f:link.action action="list" pageUid="{settings.listEventPid}"><i class="glyphicon glyphicon-chevron-left"></i><f:translate id="back_to_list" /></f:link.action>
 
     </div>
-
-
-    <f:comment><f:render partial="Event/Properties" arguments="{event:event}" /></f:comment>
-
-
 
 </f:section>

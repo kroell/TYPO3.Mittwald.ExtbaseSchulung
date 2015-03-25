@@ -12,7 +12,9 @@
             <h1 style="margin-top:0px;">Veranstaltungen</h1>
         </div>
         <div class="col-md-3">
-            <f:render partial="Event/CategoryDropdown" arguments="{allCategories:allCategories, selectedEventCategory:selectedEventCategory}"/>
+            <f:if condition="{allCategories}">
+                <f:render partial="Event/CategoryDropdown" arguments="{allCategories:allCategories, selectedEventCategory:selectedEventCategory}"/>
+            </f:if>
         </div>
 
     </div>
@@ -22,7 +24,7 @@
 
         <f:then>
 
-            <f:widget.paginate objects="{events}" as="pagedEvents" configuration="{itemsPerPage: 2, insertAbove: 0, insertBelow: 1, addQueryStringMethod: 'GET,POST'}">
+            <f:widget.paginate objects="{events}" as="pagedEvents" configuration="{paginate.configuration}">
 
             <f:for each="{pagedEvents}" as="event">
 
@@ -31,7 +33,17 @@
 
                         <div class="row">
                             <div class="col-md-8">
-                                <events:dateTimeRange start="{event.eventDateTimeStart}" end="{event.eventDateTimeStop}"/><f:if condition="{event.eventLocation}">, <a href="https://www.google.de/maps/@{event.eventLocation.latitude},{event.eventLocation.longitude},13z" target="_blank">{event.eventLocation.city}</a></f:if>
+                                <events:dateTimeRange start="{event.eventDateTimeStart}" end="{event.eventDateTimeStop}"/>
+                                <f:if condition="{event.eventLocation}"> in
+                                    <f:if condition="{event.eventLocation.latitude}">
+                                        <f:then>
+                                            <a href="https://www.google.de/maps/@{event.eventLocation.latitude},{event.eventLocation.longitude},13z" target="_blank">{event.eventLocation.city}</a>
+                                        </f:then>
+                                        <f:else>
+                                            {event.eventLocation.city}
+                                        </f:else>
+                                    </f:if>
+                                </f:if>
                             </div>
                             <div class="col-md-4 ">
                                 <f:for each="{event.eventCategories}" as="category" reverse="1">
@@ -43,24 +55,26 @@
 
                         <div class="row">
                             <div class="col-md-10">
-                                <f:link.action action="show" arguments="{event : event}" pageUid="5"><h3 style="margin-top:0;">{event.title}<f:if condition="{event.topEvent}"> <i class="glyphicon glyphicon-star"></i></f:if></h3></f:link.action>
+                                <h3><f:if condition="{event.topEvent}"> <i class="glyphicon glyphicon-star"></i></f:if><f:link.action action="show" arguments="{event : event}" pageUid="{settings.showEventPid}">{event.title}</f:link.action></h3>
                             </div>
 
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <f:if condition="{event.subtitle}"><h3 style="margin-top:0;"><small>{event.subtitle -> f:format.nl2br()}</small></h3></f:if>
+                                <f:if condition="{event.subtitle}"><h4 style="margin-top:0;">{event.subtitle -> f:format.nl2br()}</h4></f:if>
                             </div>
                         </div>
                         <div class="row">
                             <f:if condition="{event.images}">
                                 <f:then>
-                                    <div class="col-md-4 col-sm-12">
-                                        <f:image image="{event.images.0}" class="img-responsive"></f:image>
-                                    </div>
-                                    <div class="col-md-8">
-                                        <article>{event.shortText -> f:format.crop(maxCharacters:'200')} </article>
-                                    </div>
+                                    <f:if condition="{settings.showFirstImageInList}">
+                                        <div class="col-md-3 col-sm-12">
+                                            <f:image image="{event.images.0}" class="img-responsive"></f:image>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <article>{event.shortText -> f:format.crop(maxCharacters:'200')} </article>
+                                        </div>
+                                    </f:if>
                                 </f:then>
                                 <f:else>
                                     <div class="col-md-12">
@@ -85,7 +99,7 @@
         </f:then>
 
         <f:else>
-            <div class="alert alert-danger"><f:translate id="no_events_found" default="Keine Events vorhanden" /></div>
+            <div class="no-events text-center"><em><f:translate id="no_events_found" default="Keine Veranstaltungen vorhanden" /></em></div>
         </f:else>
 
     </f:if>

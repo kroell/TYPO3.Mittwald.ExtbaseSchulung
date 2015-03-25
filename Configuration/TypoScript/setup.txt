@@ -28,44 +28,6 @@ plugin.tx_otevents {
 	}
 }
 
-plugin.tx_otevents._CSS_DEFAULT_STYLE (
-	textarea.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
-	}
-
-	.tx-ot-events table {
-		border-collapse:separate;
-		border-spacing:10px;
-	}
-
-	.tx-ot-events table th {
-		font-weight:bold;
-	}
-
-	.tx-ot-events table td {
-		vertical-align:top;
-	}
-
-	.typo3-messages .message-error {
-		color:red;
-	}
-
-	.typo3-messages .message-ok {
-		color:green;
-	}
-
-	h1{
-		margin-bottom:30px !important;
-	}
-
-)
-
 
 TCEFORM.tt_content.pi_flexform.tx_otevents.sDEF.event {
 	# Remove
@@ -83,5 +45,36 @@ module.tx_otevents {
 		templateRootPath = {$module.tx_otevents.view.templateRootPath}
 		partialRootPath = {$module.tx_otevents.view.partialRootPath}
 		layoutRootPath = {$module.tx_otevents.view.layoutRootPath}
+	}
+}
+
+page {
+	includeCSS {
+		bsDatepickerCss = EXT:ot_events/Resources/Public/Vendor/bootstrap-datepicker/css/bootstrap-datepicker3.min.css
+		#bsDatepickerCss.excludeFromConcatenation = 1
+		#bsDatepickerCss.disableCompression = 1
+	}
+	includeJSFooter{
+		#bsDatepickerJS = EXT:ot_events/Resources/Public/Vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js
+		#bsDatepickerLocaleJs = EXT:ot_events/Resources/Public/Vendor/bootstrap-datepicker/locales/bootstrap-datepicker.de.min.js
+	}
+}
+
+
+ajaxOtEvents = PAGE
+ajaxOtEvents {
+	typeNum = 300
+	10 = USER
+	10 {
+		userFunc = TYPO3\CMS\Extbase\Core\Bootstrap->run
+		pluginName = Pi1
+		extensionName = OtEvents
+		vendorName = OliverThiele
+	}
+	config {
+		disableAllHeaderCode = 1
+		additionalHeaders = Content-type:application/json
+		xhtml_cleaning = 0
+		admPanel = 0
 	}
 }

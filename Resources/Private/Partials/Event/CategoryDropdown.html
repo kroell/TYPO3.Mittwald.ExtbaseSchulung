@@ -1,26 +1,5 @@
 <f:form action="list" controller="Event" class="form" name="eventCategory" object="eventCategory" noCache="true" noCacheHash="true" id="eventCategoryForm">
-
-    <f:comment>
-    <!--<div class="dropdown">
-        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-            <i class="glyphicon glyphicon-cog"></i> <f:translate id="dropdown_category" />
-            <span class="caret"></span>
-        </button>
-
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-            <f:for each="{allCategories}" as="category">
-                <li role="presentation"><a role="menuitem" tabindex="-1" href="#">{category.title}</a></li>
-
-            </f:for>
-
-        </ul>
-
-    </div>-->
-    </f:comment>
-
-
-    <f:form.select id="eventCategorySelect" value="{selectedEventCategory.uid}" name="eventCategory" options="{allCategories}" optionLabelField="title" optionValueField="uid" class="form-control" prependOptionLabel="-- Alle anzeigen --"/>
-
+    <f:form.select id="eventCategorySelect" value="{selectedEventCategory.uid}" name="eventCategory" options="{allCategories}" optionLabelField="title" optionValueField="uid" class="form-control" prependOptionLabel="-- Alle Kategorien anzeigen --"/>
 </f:form>
 
 <script>

@@ -1,0 +1,69 @@
+<div id="calendar-widget" data-date="{today -> f:format.date(format:'d.m.Y')}"></div>
+
+<script>
+    jQuery(document).ready(function(){
+
+        var events = jQuery.parseJSON('<f:format.htmlentitiesDecode>{events}</f:format.htmlentitiesDecode>');
+        var uriToList = '<f:format.htmlentitiesDecode>{linkToList}</f:format.htmlentitiesDecode>';
+
+        var calendarWidget = $('#calendar-widget');
+
+        calendarWidget.datepicker({
+            format: 'dd.mm.yyyy',
+            language: 'de',
+            beforeShowDay: function(date) {
+                var className = '';
+                var formattedDate = date.toLocaleDateString('pl',{day:'2-digit',year:'numeric',month:'2-digit'});
+
+                jQuery.each(events, function(iteration, event){
+                    if (event.startDate === formattedDate) {
+                        className = event.className;
+                    }
+                });
+                return className;
+            }
+        }).on('changeMonth', function(e){
+
+
+            ajaxCall('getEvents', e.date, function(response) {
+                console.log(response.data);
+                if(response.data){
+                    calendarWidget.datepicker('setDates', response.data , 'event-start');
+                }
+            });
+        });
+
+        calendarWidget.on('changeDate', function(event) {
+            var formattedDate = event.date.toLocaleDateString('pl',{day:'2-digit',year:'numeric',month:'2-digit'});
+//            console.log('formattedDate',formattedDate);
+//            console.log('show: ', calendarWidget.datepicker('getFormattedDate'));
+            document.location.href = uriToList + '&tx_otevents_pi1[selectedDate]=' + formattedDate;
+        });
+
+
+        function ajaxCall(type, data, callback) {
+
+            // send ajax request
+            var request = $.ajax({
+                type: 'POST',
+                url: 'index.php?id=1',
+                data:{
+                    type : 300,
+                    'tx_otevents_pi1[controller]' : 'Widget',
+                    'tx_otevents_pi1[action]' : 'ajax',
+                    'tx_otevents_pi1[data]' : data,
+                    'tx_otevents_pi1[type]' : type
+                },
+                success:function (response) {
+                    callback(response);
+                }
+            });
+            request.fail(function( jqXHR, textStatus ) {
+                console.log('error');
+            });
+        }
+
+
+    });
+
+</script>

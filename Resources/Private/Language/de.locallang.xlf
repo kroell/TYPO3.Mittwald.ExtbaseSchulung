@@ -71,7 +71,7 @@
 			</trans-unit>
 			<trans-unit id="no_events_found">
             	<source>No Events found</source>
-            	<target>Hier gibts nix zu sehen!</target>
+            	<target>Keine Veranstaltungen vorhanden</target>
             </trans-unit>
             <trans-unit id="back_to_list">
             	<source>Back to list</source>
